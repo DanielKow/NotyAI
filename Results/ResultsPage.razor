@@ -2,7 +2,10 @@
 @using NotyAI.Notes
 @inject Note Note
 
-<MudStack>
+<MudStack Spacing="3">
+    <MudButton StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">
+        Dodaj kolejne zdjęcie
+    </MudButton>
     <MudStack Row="true" Class="w-100" Spacing="0">
         <MudStack @onclick="GoToPhoto" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="w-100" Spacing="1">
             <MudIcon Icon="@Icons.Material.Filled.Photo" Color="GetPhotoTabColor"/>
@@ -17,32 +20,32 @@
             <MudText Typo="Typo.caption" Color="GetSummaryTabColor">Podsumowanie</MudText>
         </MudStack>
     </MudStack>
-    
-    @switch(_activeSection)
+
+    @switch (_activeSection)
     {
         case ResultSection.Photo:
             <MudStack Spacing="1">
-                @foreach(string photo in Note.Photos)
+                @foreach (string photo in Note.Photos)
                 {
-                    <MudImage Src="@photo" Fluid="true" />
+                    <MudImage Src="@photo" Fluid="true"/>
                     <MudDivider/>
                 }
             </MudStack>
             break;
         case ResultSection.Text:
             <MudStack Spacing="1">
-                @foreach(string text in Note.Texts)
+                @foreach (string text in Note.Texts)
                 {
-                    <MudText>@text</MudText>
+                    <MudText Class="break-word">@text</MudText>
                     <MudDivider/>
                 }
             </MudStack>
             break;
         case ResultSection.Summary:
-            <MudText>@Note.Summary</MudText>
+            <MudText Class="break-word">@Note.Summary</MudText>
             break;
     }
-    
+
     @if (_activeSection != ResultSection.Photo)
     {
         <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Headphones"
@@ -50,9 +53,6 @@
             Wysłuchaj
         </MudButton>
     }
-    <MudButton>
-        Dodaj kolejne zdjęcie
-    </MudButton>
 </MudStack>
 
 @code {

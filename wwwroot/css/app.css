@@ -92,3 +92,7 @@ h1:focus {
 .w-100 {
     width: 100% !important;
 }
+
+.break-word {
+    word-break: break-word !important;
+}

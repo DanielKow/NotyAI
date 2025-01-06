@@ -1,4 +1,8 @@
+@using NotyAI.Notes
+
 @inject CurrentPhoto CurrentPhoto
+@inject Note Note
+@inject NavigationManager NavigationManager
 
 @page "/ProcessPhoto"
 
@@ -10,5 +14,10 @@
 </MudStack>
 
 @code {
-    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await Task.Delay(2_000);
+        NavigationManager.NavigateTo("/Results");
+    }
+
 }

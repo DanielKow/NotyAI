@@ -2,10 +2,7 @@ namespace NotyAI.Notes;
 
 internal class Note
 {
-    private readonly List<string> _photos = [
-        File.ReadAllText("/Users/danielkowalski/Downloads/1"),
-        File.ReadAllText("/Users/danielkowalski/Downloads/2"),
-    ];
+    private readonly List<string> _photos = ["A", "B"];
     private readonly List<string> _texts =
     [
         "testtestetgsdsafads",
