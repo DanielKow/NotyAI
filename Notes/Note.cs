@@ -2,14 +2,8 @@ namespace NotyAI.Notes;
 
 internal class Note
 {
-    private readonly List<string> _photos = ["A", "B"];
-    private readonly List<string> _texts =
-    [
-        "testtestetgsdsafads",
-        "tegafsfgfdgdfsgdfsgdfgdfsgdfs",
-        "dsfaisduf6kzhmp2lynozmp613kmvnsy2rqm6kzvnpkm2oq"
-    ];
-
+    private readonly List<string> _photos = [];
+    private readonly List<string> _texts = [];
     public IEnumerable<string> Photos => _photos;
     public IEnumerable<string> Texts => _texts;
     public string Summary { get; private set; } = string.Empty;
