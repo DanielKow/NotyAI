@@ -21,7 +21,7 @@
         Note.AddPhoto(CurrentPhoto.Source);
         Note.AddText(CurrentPhoto.Text);
 
-        Note.Summarize();
+        await Note.Summarize();
         
         NavigationManager.NavigateTo("/Results");
     }

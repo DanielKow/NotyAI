@@ -2,5 +2,6 @@ namespace NotyAI.OpenAI;
 
 public interface IOpenAiService
 {
-    Task<string> GetTextFromImageAsync(string base64);
+    Task<string> GetTextFromImage(string base64);
+    Task<string> SummarizeTexts(IEnumerable<string> texts); 
 }

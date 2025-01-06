@@ -21,7 +21,7 @@ internal class OpenAiService : IOpenAiService
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
         }));
 
-    public async Task<string> GetTextFromImageAsync(string base64)
+    public async Task<string> GetTextFromImage(string base64)
     {
         var messages = new object[]
         {
@@ -71,6 +71,55 @@ internal class OpenAiService : IOpenAiService
         if (response.Choices.Length == 0)
         {
             return "Nie udało się odczytać tekstu ze zdjęcia";
+        }
+
+        return response.Choices[0].Message.Content;
+    }
+
+    public async Task<string> SummarizeTexts(IEnumerable<string> texts)
+    {
+        string text = string.Join('\n', texts);
+        
+        var messages = new object[]
+        {
+            new
+            {
+                role = "system",
+                content = "Jesteś automatem podsumowującym notatki"
+            },
+            new
+            {
+                role = "user",
+                content = new object[]
+                {
+                    new
+                    {
+                        type = "text",
+                        text = $"Podsumuj następujące notatki:\n{text}"
+                    }
+                }
+            }
+        };
+
+        var requestBody = new
+        {
+            model = "gpt-4o-mini",
+            messages
+        };
+
+        string requestBodyJson = JsonSerializer.Serialize(requestBody, _jsonSerializerOptions);
+
+        RestRequest request = new RestRequest().AddJsonBody(requestBodyJson);
+        var response = await _client.PostAsync<OpenAiResponse>(request);
+
+        if (response is null)
+        {
+            return text;
+        }
+
+        if (response.Choices.Length == 0)
+        {
+            return text;
         }
 
         return response.Choices[0].Message.Content;

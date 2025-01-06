@@ -1,6 +1,8 @@
+using NotyAI.OpenAI;
+
 namespace NotyAI.Notes;
 
-internal class Note
+internal class Note(IOpenAiService openAiService)
 {
     private readonly List<string> _photos = [];
     private readonly List<string> _texts = [];
@@ -20,9 +22,9 @@ internal class Note
         _texts.Add(text);
     }
 
-    public void Summarize()
+    public async Task Summarize()
     {
-        Summary = string.Join("\n", _texts);
+        Summary = await openAiService.SummarizeTexts(_texts);
     }
     
     public void Clear()

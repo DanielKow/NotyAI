@@ -18,12 +18,13 @@ internal class CurrentPhoto(IOpenAiService openAiService)
     
     public async Task ReadText()
     {
-        if (IsCaptured())
+        if (!IsCaptured())
         {
-            Text = "Puste zdjęcie";
+            Text = "Brak zdjęcia";
+            return;
         }
         
-        Text = await openAiService.GetTextFromImageAsync(Source);;
+        Text = await openAiService.GetTextFromImage(Source);;
     }
     
 }
