@@ -16,6 +16,7 @@
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        CurrentPhoto.ReadText();
         await Task.Delay(2_000);
         
         Note.AddPhoto(CurrentPhoto.Source);

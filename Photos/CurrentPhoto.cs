@@ -14,9 +14,9 @@ internal class CurrentPhoto
         Text = string.Empty;
     }
     
-    public void TextRead(string text)
+    public void ReadText()
     {
-        Text = text;
+        Text = "test";
     }
     
 }
