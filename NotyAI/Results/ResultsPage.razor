@@ -31,7 +31,7 @@
         case ResultSection.Photo:
             <MudStack Spacing="1">
                 <Virtualize Items="Note.Photos" Context="photo" OverscanCount="1">
-                    <MudImage Src="@photo" Fluid="true" />
+                    <img src="@photo" alt="image" loading="lazy" />
                     <MudDivider />
                 </Virtualize>
             </MudStack>
