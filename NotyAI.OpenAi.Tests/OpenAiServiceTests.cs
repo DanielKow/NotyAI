@@ -36,4 +36,18 @@ public class Tests
         // Assert
         summary.Should().NotBeEmpty();
     }
+    
+    [Test]
+    public async Task SaveTextToSpeechAsync_should_save_text_to_speech()
+    {
+        // Arrange
+        var client = new OpenAiService();
+        string path = Path.Combine("test.wav");
+
+        // Act
+        await client.SaveTextToSpeech(path, "Oto jest przykładowy tekst");
+
+        // Assert
+        File.Exists(path).Should().BeTrue();
+    }
 }

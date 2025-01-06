@@ -1,4 +1,7 @@
+using System.ClientModel;
 using System.Text.Json;
+using OpenAI.Audio;
+using OpenAI.Chat;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Serializers.Json;
@@ -21,6 +24,8 @@ internal class OpenAiService : IOpenAiService
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
         }));
 
+    private readonly AudioClient _audioClient = new("tts-1", OpenAiConstants.ApiKey);
+    
     public async Task<string> GetTextFromImage(string base64)
     {
         var messages = new object[]
@@ -123,5 +128,18 @@ internal class OpenAiService : IOpenAiService
         }
 
         return response.Choices[0].Message.Content;
+    }
+
+    public async Task SaveTextToSpeech(string path, string text)
+    {
+        BinaryData? speech = await _audioClient.GenerateSpeechAsync(text, GeneratedSpeechVoice.Alloy);
+
+        if (speech is null)
+        {
+            return;
+        }
+        
+        await using FileStream stream = File.OpenWrite(path);
+        await speech.ToStream().CopyToAsync(stream);
     }
 }
