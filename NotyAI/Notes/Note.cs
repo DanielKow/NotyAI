@@ -38,5 +38,8 @@ internal class Note(IOpenAiService openAiService)
         _photos.Clear();
         _texts.Clear();
         Summary = string.Empty;
+        
+        File.Delete(TextSpeechPath);
+        File.Delete(SummarySpeechPath);
     }
 }
