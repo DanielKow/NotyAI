@@ -1,9 +1,12 @@
 @page "/Results"
 @using NotyAI.Notes
 @inject Note Note
+@inject CurrentPhoto CurrentPhoto
+@inject IPhotoService PhotoService
+@inject NavigationManager NavigationManager
 
 <MudStack Spacing="3">
-    <MudButton StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary">
+    <MudButton StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary" OnClick="CaptureNextPhoto">
         Dodaj kolejne zdjęcie
     </MudButton>
     <MudStack Row="true" Class="w-100" Spacing="0">
@@ -48,10 +51,8 @@
 
     @if (_activeSection != ResultSection.Photo)
     {
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Headphones"
-                   OnClick="Listen">
-            Wysłuchaj
-        </MudButton>
+        <MudText>@Note.TextSpeechPath</MudText>
+        <MudText>@Note.SummarySpeechPath</MudText>
     }
 </MudStack>
 
@@ -60,23 +61,6 @@
     public Color GetPhotoTabColor => _activeSection == ResultSection.Photo ? Color.Primary : Color.Default;
     public Color GetTextTabColor => _activeSection == ResultSection.Text ? Color.Primary : Color.Default;
     public Color GetSummaryTabColor => _activeSection == ResultSection.Summary ? Color.Primary : Color.Default;
-
-    private async Task Listen()
-    {
-        string text = _activeSection switch
-        {
-            ResultSection.Text => string.Join('\n', Note.Texts),
-            ResultSection.Summary => Note.Summary,
-            _ => string.Empty
-        };
-
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            return;
-        }
-
-        await TextToSpeech.SpeakAsync(text);
-    }
 
     private void GoToPhoto()
     {
@@ -91,6 +75,18 @@
     private void GoToSummary()
     {
         _activeSection = ResultSection.Summary;
+    }
+
+    private async Task CaptureNextPhoto()
+    {
+        string base64 = await PhotoService.CaptureAsync();
+        if (string.IsNullOrWhiteSpace(base64))
+        {
+            return;
+        }
+        
+        CurrentPhoto.Captured(base64);
+        NavigationManager.NavigateTo("/ProcessPhoto");
     }
 
 }

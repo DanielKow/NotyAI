@@ -21,6 +21,8 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<CurrentPhoto>();
         builder.Services.AddSingleton<Note>();
+
+        builder.Services.AddTransient<IPhotoService, PhotoService>();
         
         builder.Services.AddMauiBlazorWebView();
 

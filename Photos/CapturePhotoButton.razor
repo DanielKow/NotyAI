@@ -1,6 +1,4 @@
-@using System.IO
-@using Microsoft.Maui.Media
-@using Microsoft.Maui.Storage
+@inject IPhotoService PhotoService
 
 <MudStack Justify="Justify.Center" AlignItems="AlignItems.Center">
     <MudFab StartIcon="@Icons.Material.Filled.PhotoCamera" OnClick="CapturePhoto" Size="Size.Large" IconSize="Size.Large" Color="Color.Primary"/>
@@ -13,25 +11,8 @@
     
     private async Task CapturePhoto()
     {
-        try
-        {
-            if (!MediaPicker.Default.IsCaptureSupported)
-            {
-                return;
-            }
-            
-            FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
-            await using Stream stream = await photo.OpenReadAsync();
-            using var memoryStream = new MemoryStream();
-            await stream.CopyToAsync(memoryStream);
-
-            string base64 = Convert.ToBase64String(memoryStream.ToArray());
-            await OnPhotoCaptured.InvokeAsync(base64);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        string base64 = await PhotoService.CaptureAsync();
+        await OnPhotoCaptured.InvokeAsync(base64);
     }
 
 }

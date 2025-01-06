@@ -13,8 +13,8 @@ internal class Note
     public IEnumerable<string> Photos => _photos;
     public IEnumerable<string> Texts => _texts;
     public string Summary { get; private set; } = string.Empty;
-    public string TextSpeechPath { get; private set; } = string.Empty;
-    public string SummarySpeechPath { get; private set; } = string.Empty;
+    public static string TextSpeechPath => Path.Combine(FileSystem.AppDataDirectory, "text.wav");
+    public static string SummarySpeechPath => Path.Combine(FileSystem.AppDataDirectory, "summary.wav");
 
     public void AddPhoto(string photo)
     {
