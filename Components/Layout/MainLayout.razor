@@ -1,17 +1,38 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_myCustomTheme"/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+<MudLayout>
+    <MudAppBar Elevation="0" Color="Color.Transparent">
+        <MudSpacer/>
+        <MudToggleIconButton @bind-Toggled="@_isDarkMode"
+                             Icon="@Icons.Material.Filled.ModeNight"
+                             ToggledIcon="@Icons.Material.Filled.WbSunny"/>
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large">
             @Body
-        </article>
-    </main>
-</div>
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+
+    private bool _isDarkMode = true;
+    
+    MudTheme _myCustomTheme = new()
+    {
+        Typography = new Typography
+        {
+            H1 = new H1 { FontSize = "2em", FontWeight = 500, LineHeight = 1.2 },
+            H2 = new H2 { FontSize = "1.5em", FontWeight = 500, LineHeight = 1.2 },
+            H3 = new H3 { FontSize = "1.17em", FontWeight = 500, LineHeight = 1.2 },
+            H4 = new H4 { FontSize = "1em", FontWeight = 500, LineHeight = 1.2 },
+            H5 = new H5 { FontSize = "0.83em", FontWeight = 500, LineHeight = 1.2 },
+            H6 = new H6 { FontSize = "0.67em", FontWeight = 500, LineHeight = 1.2 },
+        }
+    };
+}

@@ -1,5 +1,32 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<MudStack Spacing="12">
+    <MudText Typo="Typo.h1">Noty.AI</MudText>
+    <MudList T="string" ReadOnly="true">
+        <MudListItem>
+            <MudStack Row="true">
+                <MudIcon Icon="@Icons.Material.Filled.PhotoCamera"/>
+                <MudText>Zrób zdjęcie swoich notatek</MudText>
+            </MudStack>
+        </MudListItem>
+        <MudListItem>
+            <MudStack Row="true">
+                <MudIcon Icon="@Icons.Material.Filled.Headphones"/>
+                <MudText>Wysłuchaj ich</MudText>
+            </MudStack>
+        </MudListItem>
+        <MudListItem>
+            <MudStack Row="true">
+                <MudIcon Icon="@Icons.Material.Filled.EditNote"/>
+                <MudText>Pozwól AI przygotować podsumowanie</MudText>
+            </MudStack>
+        </MudListItem>
+        <MudListItem>
+            <MudStack Row="true">
+                <MudIcon Icon="@Icons.Material.Filled.AutoStories"/>
+                <MudText>Ucz się efektywnie!</MudText>
+            </MudStack>
+        </MudListItem>
+    </MudList>
+</MudStack>
 
-Welcome to your new app.
