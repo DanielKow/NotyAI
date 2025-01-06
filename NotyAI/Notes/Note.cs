@@ -6,7 +6,7 @@ internal class Note(IOpenAiService openAiService)
 {
     private readonly List<string> _photos = [];
     private readonly List<string> _texts = [];
-    public IEnumerable<string> Photos => _photos;
+    public ICollection<string> Photos => _photos;
     public IEnumerable<string> Texts => _texts;
     public string Summary { get; private set; } = string.Empty;
     public static string TextSpeechPath => Path.Combine(FileSystem.AppDataDirectory, "text.wav");

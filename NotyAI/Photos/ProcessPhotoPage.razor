@@ -18,18 +18,23 @@
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await CurrentPhoto.ReadText();
+        if (firstRender)
+        {
+            await CurrentPhoto.ReadText();
         
-        Note.AddPhoto(CurrentPhoto.Source);
-        Note.AddText(CurrentPhoto.Text);
+            Note.AddPhoto(CurrentPhoto.Source);
+            Note.AddText(CurrentPhoto.Text);
 
-        _phase = "Podsumowywanie notatek...";
-        await Note.Summarize();
+            _phase = "Podsumowywanie notatek...";
+            await InvokeAsync(StateHasChanged);
+            await Note.Summarize();
         
-        _phase = "Przygotowywanie notatek do odczytania...";
-        await Note.TextToSpeech();
+            _phase = "Przygotowywanie notatek do odczytania...";
+            await InvokeAsync(StateHasChanged);
+            await Note.TextToSpeech();
         
-        NavigationManager.NavigateTo("/Results");
+            NavigationManager.NavigateTo("/Results");
+        }
     }
 
 }

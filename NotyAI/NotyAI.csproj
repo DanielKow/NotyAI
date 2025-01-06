@@ -66,6 +66,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
         <PackageReference Include="MudBlazor" Version="7.15.0" />
         <PackageReference Include="OpenAI" Version="2.1.0" />
+        <PackageReference Include="Plugin.Maui.Audio" Version="3.0.1" />
     </ItemGroup>
 
     <ItemGroup>

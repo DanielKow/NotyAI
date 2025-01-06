@@ -30,16 +30,15 @@
     {
         case ResultSection.Photo:
             <MudStack Spacing="1">
-                @foreach (string photo in Note.Photos)
-                {
-                    <MudImage Src="@photo" Fluid="true"/>
-                    <MudDivider/>
-                }
+                <Virtualize Items="Note.Photos" Context="photo" OverscanCount="1">
+                    <MudImage Src="@photo" Fluid="true" />
+                    <MudDivider />
+                </Virtualize>
             </MudStack>
             break;
         case ResultSection.Text:
             <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center">
-                <audio src="@Note.TextSpeechPath" controls></audio>
+                <Player Src="@Note.TextSpeechPath"/>
             </MudStack>
             <MudStack Spacing="1">
                 @foreach (string text in Note.Texts)
@@ -51,7 +50,7 @@
             break;
         case ResultSection.Summary:
             <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center">
-                <audio src="@Note.SummarySpeechPath" controls></audio>
+                <Player Src="@Note.SummarySpeechPath"/>
             </MudStack>
             <MudText Class="break-word">@Note.Summary</MudText>
             break;

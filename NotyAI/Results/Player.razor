@@ -1,0 +1,73 @@
+@using System.Timers
+@using Plugin.Maui.Audio
+
+@implements IDisposable
+
+@inject IAudioManager AudioManager
+
+
+<MudPaper>
+    <MudStack Row="true" Class="w-100">
+        @if (_audioPlayer?.IsPlaying ?? false)
+        {
+            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Pause" OnClick="Pause"/>
+        }
+        else
+        {
+            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.PlayArrow" OnClick="Play"/>
+        }
+
+        <MudSlider T="double" Max="_audioPlayer?.Duration ?? 0"
+                   ValueChanged="OnSliderChanged"
+                   Value="_audioPlayer?.CurrentPosition ?? 0"
+                   Disabled="@(_audioPlayer is null)"/>
+        <MudText>@ToMinutes(_audioPlayer?.CurrentPosition)</MudText>
+
+    </MudStack>
+</MudPaper>
+
+@code {
+    [Parameter] public string Src { get; set; } = string.Empty;
+    private IAudioPlayer? _audioPlayer;
+    private Timer? _timer;
+
+    protected override void OnInitialized()
+    {
+        _timer = new Timer(1000);
+        _timer.Elapsed += (_, _) => { InvokeAsync(StateHasChanged); };
+    }
+
+    private void Play()
+    {
+        _audioPlayer ??= AudioManager.CreatePlayer(Src);
+        _audioPlayer.Play();
+        _timer?.Start();
+    }
+
+    private void Pause()
+    {
+        _audioPlayer?.Pause();
+        _timer?.Stop();
+    }
+
+
+    public void Dispose()
+    {
+        _audioPlayer?.Dispose();
+    }
+
+    private static string ToMinutes(double? audioPlayerCurrentPosition)
+    {
+        return audioPlayerCurrentPosition is null 
+            ? "00:00" 
+            : TimeSpan.FromSeconds(audioPlayerCurrentPosition.Value).ToString("mm\\:ss");
+    }
+
+    private void OnSliderChanged(double value)
+    {
+        _audioPlayer?.Seek(value);
+        _timer?.Stop();
+        _timer?.Dispose();
+    }
+
+}
