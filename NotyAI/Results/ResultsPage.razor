@@ -36,6 +36,7 @@
             </MudStack>
             break;
         case ResultSection.Text:
+            <audio src="@Note.TextSpeechPath" controls></audio>
             <MudStack Spacing="1">
                 @foreach (string text in Note.Texts)
                 {
@@ -45,14 +46,9 @@
             </MudStack>
             break;
         case ResultSection.Summary:
+            <audio src="@Note.SummarySpeechPath" controls></audio>
             <MudText Class="break-word">@Note.Summary</MudText>
             break;
-    }
-
-    @if (_activeSection != ResultSection.Photo)
-    {
-        <MudText>@Note.TextSpeechPath</MudText>
-        <MudText>@Note.SummarySpeechPath</MudText>
     }
 </MudStack>
 
