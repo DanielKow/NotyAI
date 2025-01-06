@@ -20,9 +20,9 @@ internal class Note
         _texts.Add(text);
     }
 
-    public void Summarized(string summary)
+    public void Summarize()
     {
-        Summary = summary;
+        Summary = string.Join("\n", _texts);
     }
     
     public void Clear()

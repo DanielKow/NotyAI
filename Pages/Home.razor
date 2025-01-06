@@ -1,7 +1,11 @@
-﻿@inject CurrentPhoto CurrentPhoto
+﻿@page "/"
+
+@using NotyAI.Notes
+
+@inject CurrentPhoto CurrentPhoto
+@inject Note Note
 @inject NavigationManager NavigationManager
 
-@page "/"
 
 <MudStack Spacing="12">
     <MudText Typo="Typo.h1">Noty.AI</MudText>
@@ -38,6 +42,7 @@
 @code {
     private void OnPhotoCaptured(string base64)
     {
+        Note.Clear();
         CurrentPhoto.Captured(base64);
 
         if (CurrentPhoto.IsCaptured())

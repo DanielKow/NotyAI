@@ -17,6 +17,12 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await Task.Delay(2_000);
+        
+        Note.AddPhoto(CurrentPhoto.Source);
+        Note.AddText(CurrentPhoto.Text);
+
+        Note.Summarize();
+        
         NavigationManager.NavigateTo("/Results");
     }
 
