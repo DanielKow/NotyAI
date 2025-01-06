@@ -1,18 +1,31 @@
 @if (_isLoaded)
 {
     <img src="@Src" alt="image" />
-    
 }
 else
 {
     <MudSkeleton Width="100%" Height="20px" Animation="Animation.Wave"/>
-    <img src="@Src" alt="image" @onload="Loaded" class="invisible" />
+    @(!_isRendering)
+    {
+        <img src="@Src" alt="image" @onload="Loaded" class="invisible" />
+    }
 }
 
 @code {
     [Parameter]
     public string Src { get; set; } = string.Empty;
     private bool _isLoaded;
+    
+    private bool _isRendering = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_isRendering)
+        {
+            _isRendering = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 
     private void Loaded()
     {
