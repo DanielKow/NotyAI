@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using MudBlazor.Services;
+using NotyAI.Photos;
 
 namespace NotyAI;
 
@@ -16,6 +17,9 @@ public static class MauiProgram
             .ConfigureFonts(fonts => { fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"); });
 
         builder.Services.AddMudServices();
+
+        builder.Services.AddSingleton<ActualPhoto>();
+        
         builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG

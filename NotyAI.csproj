@@ -13,6 +13,8 @@
             either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
+        <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+        
         <OutputType>Exe</OutputType>
         <RootNamespace>NotyAI</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -63,6 +65,13 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
         <PackageReference Include="MudBlazor" Version="7.15.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Layout\MainLayout.razor" />
+      <AdditionalFiles Include="Layout\NavMenu.razor" />
+      <AdditionalFiles Include="Pages\Home.razor" />
+      <AdditionalFiles Include="Photos\CapturePhotoButton.razor" />
     </ItemGroup>
 
 </Project>

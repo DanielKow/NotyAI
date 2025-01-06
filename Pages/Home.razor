@@ -1,4 +1,6 @@
-﻿@page "/"
+﻿@inject ActualPhoto AcutalPhoto
+
+@page "/"
 
 <MudStack Spacing="12">
     <MudText Typo="Typo.h1">Noty.AI</MudText>
@@ -28,5 +30,12 @@
             </MudStack>
         </MudListItem>
     </MudList>
+    <CapturePhotoButton OnPhotoCaptured="OnPhotoCaptured"/>
 </MudStack>
 
+@code {
+    private void OnPhotoCaptured(string base64)
+    {
+        AcutalPhoto.Captured(base64);
+    }
+}
