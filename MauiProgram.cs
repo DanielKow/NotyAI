@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using MudBlazor.Services;
 using NotyAI.Notes;
+using NotyAI.OpenAI;
 using NotyAI.Photos;
 
 namespace NotyAI;
@@ -23,6 +24,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<Note>();
 
         builder.Services.AddTransient<IPhotoService, PhotoService>();
+        builder.Services.AddTransient<IOpenAiService, OpenAiService>();
         
         builder.Services.AddMauiBlazorWebView();
 

@@ -74,8 +74,4 @@
       <AdditionalFiles Include="Photos\CapturePhotoButton.razor" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="OpenAI\" />
-    </ItemGroup>
-
 </Project>
