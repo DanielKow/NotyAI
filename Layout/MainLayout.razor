@@ -7,6 +7,7 @@
 
 <MudLayout>
     <MudAppBar Elevation="0" Color="Color.Transparent">
+        <MudIconButton Href="Debug" Icon="@Icons.Material.Filled.BugReport"/>
         <MudSpacer/>
         <MudToggleIconButton @bind-Toggled="@_isDarkMode"
                              Icon="@Icons.Material.Filled.ModeNight"
@@ -22,8 +23,8 @@
 @code {
 
     private bool _isDarkMode = true;
-    
-    MudTheme _myCustomTheme = new()
+
+    private readonly MudTheme _myCustomTheme = new()
     {
         Typography = new Typography
         {

@@ -1,0 +1,39 @@
+@page "/Debug"
+@inject ActualPhoto ActualPhoto
+@inject NavigationManager NavigationManager
+
+<MudStack>
+    <MudText Typo="Typo.h1">Debug page</MudText>
+    <MudTextField Lines="8" @bind-Text="@_base64" Label="Base64" Clearable="true"/>
+    <MudTextField Lines="8" @bind-Text="_text" Label="Read text" Clearable="true"/>
+    <MudTextField Lines="8" @bind-Text="_summary" Label="Summary" Clearable="true"/>
+    <MudButton OnClick="Process">Process</MudButton>
+    <MudButton OnClick="ToResults">To results</MudButton>
+</MudStack>
+
+
+@code {
+    private string _base64 = string.Empty;
+    private string _text = string.Empty;
+    private string _summary = string.Empty;
+
+
+    private void Process()
+    {
+        ActualPhoto.Captured(_base64);
+        ActualPhoto.TextRead(_text);
+        ActualPhoto.Summarized(_summary);
+        
+        NavigationManager.NavigateTo("/ProcessPhoto");
+    }
+
+    private void ToResults()
+    {
+        ActualPhoto.Captured(_base64);
+        ActualPhoto.TextRead(_text);
+        ActualPhoto.Summarized(_summary);
+        
+        NavigationManager.NavigateTo("/Results");
+    }
+
+}
