@@ -16,14 +16,14 @@ internal class CurrentPhoto(IOpenAiService openAiService)
         Text = string.Empty;
     }
     
-    public void ReadText()
+    public async Task ReadText()
     {
         if (IsCaptured())
         {
             Text = "Puste zdjęcie";
         }
         
-        Text = openAiService.GetTextFromImageAsync(Source);;
+        Text = await openAiService.GetTextFromImageAsync(Source);;
     }
     
 }

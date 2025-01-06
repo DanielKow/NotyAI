@@ -74,4 +74,8 @@
       <AdditionalFiles Include="Photos\CapturePhotoButton.razor" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\NotyAI.OpenAi\NotyAI.OpenAi.csproj" />
+    </ItemGroup>
+
 </Project>

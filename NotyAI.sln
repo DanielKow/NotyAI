@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotyAI", "NotyAI\NotyAI.csproj", "{2EABE8DC-6306-48DE-949F-391EB2F94888}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotyAI.OpenAi.Tests", "NotyAI.OpenAi.Tests\NotyAI.OpenAi.Tests.csproj", "{E0650993-ADD2-4CA4-B0B7-E8E39B98D426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotyAI.OpenAi", "NotyAI.OpenAi\NotyAI.OpenAi.csproj", "{569B841F-0C3F-43E6-B843-020F30CA94D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0650993-ADD2-4CA4-B0B7-E8E39B98D426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0650993-ADD2-4CA4-B0B7-E8E39B98D426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0650993-ADD2-4CA4-B0B7-E8E39B98D426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0650993-ADD2-4CA4-B0B7-E8E39B98D426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{569B841F-0C3F-43E6-B843-020F30CA94D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569B841F-0C3F-43E6-B843-020F30CA94D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569B841F-0C3F-43E6-B843-020F30CA94D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569B841F-0C3F-43E6-B843-020F30CA94D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
