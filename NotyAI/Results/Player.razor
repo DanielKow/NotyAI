@@ -21,8 +21,7 @@
                    ValueChanged="OnSliderChanged"
                    Value="_audioPlayer?.CurrentPosition ?? 0"
                    Disabled="@(_audioPlayer is null)"/>
-        <MudText>@ToMinutes(_audioPlayer?.CurrentPosition)</MudText>
-
+        <MudText Class="pr-2">@ToMinutes(_audioPlayer?.CurrentPosition)</MudText>
     </MudStack>
 </MudPaper>
 
