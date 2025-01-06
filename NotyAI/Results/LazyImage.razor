@@ -1,0 +1,24 @@
+@if (_isLoaded)
+{
+    <img src="@Src" alt="image" @onload="Loaded" />
+    
+}
+else
+{
+    <MudSkeleton Width="100%" Height="20px" Animation="Animation.Wave"/>
+    <img src="@Src" alt="image" @onload="Loaded" class="d-none" />
+}
+
+@code {
+    [Parameter]
+    public string Src { get; set; } = string.Empty;
+    private bool _isLoaded;
+
+
+    private void Loaded()
+    {
+        _isLoaded = true;
+        StateHasChanged();
+    }
+
+}
