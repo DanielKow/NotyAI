@@ -1,4 +1,4 @@
-﻿@inject ActualPhoto ActualPhoto
+﻿@inject CurrentPhoto CurrentPhoto
 @inject NavigationManager NavigationManager
 
 @page "/"
@@ -37,9 +37,9 @@
 @code {
     private void OnPhotoCaptured(string base64)
     {
-        ActualPhoto.Captured(base64);
+        CurrentPhoto.Captured(base64);
 
-        if (ActualPhoto.IsCaptured())
+        if (CurrentPhoto.IsCaptured())
         {
             NavigationManager.NavigateTo("/ReadTextFromImage");
         }

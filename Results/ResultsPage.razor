@@ -1,0 +1,96 @@
+@page "/Results"
+@using NotyAI.Notes
+@inject Note Note
+
+<MudStack>
+    <MudStack Row="true" Class="w-100" Spacing="0">
+        <MudStack @onclick="GoToPhoto" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="w-100" Spacing="1">
+            <MudIcon Icon="@Icons.Material.Filled.Photo" Color="GetPhotoTabColor"/>
+            <MudText Typo="Typo.caption" Color="GetPhotoTabColor">Zdjęcie</MudText>
+        </MudStack>
+        <MudStack @onclick="GoToText" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="w-100" Spacing="1">
+            <MudIcon Icon="@Icons.Material.Filled.TextSnippet" Color="GetTextTabColor"/>
+            <MudText Typo="Typo.caption" Color="GetTextTabColor">Tekst</MudText>
+        </MudStack>
+        <MudStack @onclick="GoToSummary" AlignItems="AlignItems.Center" Justify="Justify.Center" Class="w-100" Spacing="1">
+            <MudIcon Icon="@Icons.Material.Filled.EditNote" Color="GetSummaryTabColor"/>
+            <MudText Typo="Typo.caption" Color="GetSummaryTabColor">Podsumowanie</MudText>
+        </MudStack>
+    </MudStack>
+    
+    @switch(_activeSection)
+    {
+        case ResultSection.Photo:
+            <MudStack Spacing="1">
+                @foreach(string photo in Note.Photos)
+                {
+                    <MudImage Src="@photo" Fluid="true" />
+                    <MudDivider/>
+                }
+            </MudStack>
+            break;
+        case ResultSection.Text:
+            <MudStack Spacing="1">
+                @foreach(string text in Note.Texts)
+                {
+                    <MudText>@text</MudText>
+                    <MudDivider/>
+                }
+            </MudStack>
+            break;
+        case ResultSection.Summary:
+            <MudText>@Note.Summary</MudText>
+            break;
+    }
+    
+    @if (_activeSection != ResultSection.Photo)
+    {
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Headphones"
+                   OnClick="Listen">
+            Wysłuchaj
+        </MudButton>
+    }
+    <MudButton>
+        Dodaj kolejne zdjęcie
+    </MudButton>
+</MudStack>
+
+@code {
+    private ResultSection _activeSection = ResultSection.Photo;
+    public Color GetPhotoTabColor => _activeSection == ResultSection.Photo ? Color.Primary : Color.Default;
+    public Color GetTextTabColor => _activeSection == ResultSection.Text ? Color.Primary : Color.Default;
+    public Color GetSummaryTabColor => _activeSection == ResultSection.Summary ? Color.Primary : Color.Default;
+
+    private async Task Listen()
+    {
+        string text = _activeSection switch
+        {
+            ResultSection.Text => string.Join('\n', Note.Texts),
+            ResultSection.Summary => Note.Summary,
+            _ => string.Empty
+        };
+
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+
+        await TextToSpeech.SpeakAsync(text);
+    }
+
+    private void GoToPhoto()
+    {
+        _activeSection = ResultSection.Photo;
+    }
+
+    private void GoToText()
+    {
+        _activeSection = ResultSection.Text;
+    }
+
+    private void GoToSummary()
+    {
+        _activeSection = ResultSection.Summary;
+    }
+
+}

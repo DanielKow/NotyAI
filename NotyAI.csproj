@@ -14,7 +14,7 @@
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
         <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-        
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <OutputType>Exe</OutputType>
         <RootNamespace>NotyAI</RootNamespace>
         <UseMaui>true</UseMaui>
@@ -70,7 +70,6 @@
 
     <ItemGroup>
       <AdditionalFiles Include="Layout\MainLayout.razor" />
-      <AdditionalFiles Include="Layout\NavMenu.razor" />
       <AdditionalFiles Include="Pages\Home.razor" />
       <AdditionalFiles Include="Photos\CapturePhotoButton.razor" />
     </ItemGroup>
