@@ -1,6 +1,8 @@
+using NotyAI.OpenAI;
+
 namespace NotyAI.Photos;
 
-internal class CurrentPhoto
+internal class CurrentPhoto(IOpenAiService openAiService)
 {
     private string _base64 = string.Empty;
     public string Text { get; private set; } = string.Empty;
@@ -16,7 +18,12 @@ internal class CurrentPhoto
     
     public void ReadText()
     {
-        Text = "test";
+        if (IsCaptured())
+        {
+            Text = "Puste zdjęcie";
+        }
+        
+        Text = openAiService.GetTextFromImageAsync(Source);;
     }
     
 }

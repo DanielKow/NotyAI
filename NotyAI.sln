@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotyAI", "NotyAI.csproj", "{5A3611EC-FA6E-48C6-B8D2-CFBC77658799}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotyAI", "NotyAI\NotyAI.csproj", "{2EABE8DC-6306-48DE-949F-391EB2F94888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A3611EC-FA6E-48C6-B8D2-CFBC77658799}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A3611EC-FA6E-48C6-B8D2-CFBC77658799}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A3611EC-FA6E-48C6-B8D2-CFBC77658799}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A3611EC-FA6E-48C6-B8D2-CFBC77658799}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EABE8DC-6306-48DE-949F-391EB2F94888}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
