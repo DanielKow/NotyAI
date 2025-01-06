@@ -1,7 +1,12 @@
+@inject ActualPhoto ActualPhoto
+
 @page "/ReadTextFromImage"
 
 <MudStack AlignItems="AlignItems.Center" Justify="Justify.Center">
-    
+    <MudProgressCircular Indeterminate="true"/>
+    <MudText Typo="Typo.h2">
+        Trwa odczytywanie tekstu ze zdjęcia...
+    </MudText>
 </MudStack>
 
 @code {

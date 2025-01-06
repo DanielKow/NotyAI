@@ -6,6 +6,8 @@ internal class ActualPhoto
     public string Text { get; private set; } = string.Empty;
     public string Summary { get; private set; } = string.Empty;
 
+    public bool IsCaptured() => !string.IsNullOrEmpty(Base64);
+    
     public void Captured(string base64)
     {
         Base64 = base64;
@@ -23,4 +25,5 @@ internal class ActualPhoto
     {
         Summary = summary;
     }
+    
 }
