@@ -5,7 +5,7 @@
 else
 {
     <MudSkeleton Width="100%" Height="20px" Animation="Animation.Wave"/>
-    @(!_isRendering)
+    @if(!_isRendering)
     {
         <img src="@Src" alt="image" @onload="Loaded" class="invisible" />
     }

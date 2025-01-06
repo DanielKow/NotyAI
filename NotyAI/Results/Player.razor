@@ -19,6 +19,7 @@
 
         <MudSlider T="double" Max="_audioPlayer?.Duration ?? 0"
                    ValueChanged="OnSliderChanged"
+                   Variant="Variant.Filled"
                    Value="_audioPlayer?.CurrentPosition ?? 0"
                    Disabled="@(_audioPlayer is null)"/>
         <MudText Class="pr-2">@ToMinutes(_audioPlayer?.CurrentPosition)</MudText>
