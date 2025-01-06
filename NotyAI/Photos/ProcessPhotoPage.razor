@@ -6,14 +6,16 @@
 
 @page "/ProcessPhoto"
 
-<MudStack AlignItems="AlignItems.Center" Justify="Justify.Center">
+<MudStack AlignItems="AlignItems.Center" Justify="Justify.Center" Class="w-100 h-100">
     <MudProgressCircular Indeterminate="true"/>
     <MudText Typo="Typo.h2">
-        Trwa odczytywanie tekstu ze zdjęcia...
+        @_phase
     </MudText>
 </MudStack>
 
 @code {
+    private string _phase = "Odczytywanie notatek ze zdjęcia...";
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await CurrentPhoto.ReadText();
@@ -21,7 +23,11 @@
         Note.AddPhoto(CurrentPhoto.Source);
         Note.AddText(CurrentPhoto.Text);
 
+        _phase = "Podsumowywanie notatek...";
         await Note.Summarize();
+        
+        _phase = "Przygotowywanie notatek do odczytania...";
+        await Note.TextToSpeech();
         
         NavigationManager.NavigateTo("/Results");
     }

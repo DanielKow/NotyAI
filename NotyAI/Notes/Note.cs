@@ -27,6 +27,12 @@ internal class Note(IOpenAiService openAiService)
         Summary = await openAiService.SummarizeTexts(_texts);
     }
     
+    public async Task TextToSpeech()
+    {
+        await openAiService.SaveTextToSpeech(TextSpeechPath, string.Join(" ", _texts));
+        await openAiService.SaveTextToSpeech(SummarySpeechPath, Summary);
+    }
+    
     public void Clear()
     {
         _photos.Clear();
