@@ -6,6 +6,7 @@ using MudBlazor.Services;
 using NotyAI.Notes;
 using NotyAI.OpenAI;
 using NotyAI.Photos;
+using Plugin.Maui.Audio;
 
 namespace NotyAI;
 
@@ -18,6 +19,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .ConfigureFonts(fonts => { fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"); });
 
+        builder.AddAudio();
         builder.Services.AddMudServices();
 
         builder.Services.AddSingleton<CurrentPhoto>();

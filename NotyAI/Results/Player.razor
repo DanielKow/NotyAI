@@ -6,8 +6,8 @@
 @inject IAudioManager AudioManager
 
 
-<MudPaper>
-    <MudStack Row="true" Class="w-100">
+<MudPaper Class="pa-2">
+    <MudStack Row="true" Class="w-100" AlignItems="AlignItems.Center" Justify="Justify.Center">
         @if (_audioPlayer?.IsPlaying ?? false)
         {
             <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Pause" OnClick="Pause"/>
@@ -37,10 +37,20 @@
         _timer.Elapsed += (_, _) => { InvokeAsync(StateHasChanged); };
     }
 
+    protected override void OnParametersSet()
+    {
+        _audioPlayer = AudioManager.CreatePlayer(Src);
+        _audioPlayer.Volume = 1;
+        _audioPlayer.PlaybackEnded += (_, _) =>
+        {
+            _timer?.Stop();
+            _audioPlayer?.Pause();
+        };
+    }
+
     private void Play()
     {
-        _audioPlayer ??= AudioManager.CreatePlayer(Src);
-        _audioPlayer.Play();
+        _audioPlayer?.Play();
         _timer?.Start();
     }
 
@@ -54,6 +64,8 @@
     public void Dispose()
     {
         _audioPlayer?.Dispose();
+        _timer?.Stop();
+        _timer?.Dispose();
     }
 
     private static string ToMinutes(double? audioPlayerCurrentPosition)
@@ -63,11 +75,10 @@
             : TimeSpan.FromSeconds(audioPlayerCurrentPosition.Value).ToString("mm\\:ss");
     }
 
-    private void OnSliderChanged(double value)
+    private async Task OnSliderChanged(double value)
     {
         _audioPlayer?.Seek(value);
-        _timer?.Stop();
-        _timer?.Dispose();
+        await InvokeAsync(StateHasChanged);
     }
 
 }
