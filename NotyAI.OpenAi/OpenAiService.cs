@@ -32,18 +32,13 @@ internal class OpenAiService : IOpenAiService
         {
             new
             {
-                role = "system",
-                content = "Jesteś automatem odczytującym treść odręcznych notatek ze zdjęcia"
-            },
-            new
-            {
                 role = "user",
                 content = new object[]
                 {
                     new
                     {
                         type = "text",
-                        text = "Odczytaj tekst ze zdjęcia notatek"
+                        text = "Proszę odczytaj tekst z załączonego zdjęcia (ręcznie napisany)."
                     },
                     new
                     {
