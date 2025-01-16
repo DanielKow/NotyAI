@@ -127,7 +127,7 @@ internal class OpenAiService : IOpenAiService
 
     public async Task SaveTextToSpeech(string path, string text)
     {
-        BinaryData? speech = await _audioClient.GenerateSpeechAsync(text, GeneratedSpeechVoice.Alloy);
+        BinaryData? speech = await _audioClient.GenerateSpeechAsync(text, GeneratedSpeechVoice.Onyx);
 
         if (speech is null)
         {
