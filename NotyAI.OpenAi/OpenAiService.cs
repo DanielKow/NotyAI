@@ -85,7 +85,15 @@ internal class OpenAiService : IOpenAiService
             new
             {
                 role = "system",
-                content = "Jesteś automatem podsumowującym notatki"
+                content = """
+                          Jesteś zaawansowanym asystentem AI, wyspecjalizowanym w analizie i podsumowywaniu 
+                          akademickich notatek. Twoim celem jest dostarczenie użytkownikowi maksymalnie 
+                          przydatnych informacji w jak najbardziej zrozumiałej formie. Wykorzystuj klarowny język, 
+                          a także stosuj strukturę, która wspiera zapamiętywanie treści. Podczas tworzenia podsumowań:
+                          - Wybieraj tylko najważniejsze fakty, definicje, pojęcia i argumenty.
+                          - Grupuj podobne tematy w logiczne sekcje.
+                          - Upewnij się, że podsumowanie podkreśla związki między różnymi tematami.
+                          """
             },
             new
             {
@@ -95,7 +103,21 @@ internal class OpenAiService : IOpenAiService
                     new
                     {
                         type = "text",
-                        text = $"Podsumuj następujące notatki:\n{text}"
+                        text =  $"""
+                                Proszę o podsumowanie poniższych notatek akademickich:
+                                
+                                {text}
+                                
+                                Podczas tworzenia podsumowania:
+                                1. Wybierz najważniejsze punkty i wylistuj je w logicznej kolejności.
+                                2. Wyodrębnij główną myśl przewodnią, która spaja wszystkie informacje w notatkach.
+                                3. Używaj zwięzłych, ale precyzyjnych zdań – unikaj zbytniego rozwlekania, ale zachowaj 
+                                kluczowe szczegóły.
+                                4. Podziel podsumowanie na sekcje tematyczne (np. wprowadzenie, kluczowe argumenty, wnioski), 
+                                jeśli notatki obejmują kilka obszarów tematycznych.
+                                5. Wskaż, dlaczego dane zagadnienia są istotne i jak odnoszą się do głównego tematu.
+                                6. Upewnij się, że podsumowanie jest czytelne i ustrukturyzowane tak, aby ułatwiało szybkie powtórki materiału.
+                                """
                     }
                 }
             }
@@ -104,7 +126,10 @@ internal class OpenAiService : IOpenAiService
         var requestBody = new
         {
             model = "gpt-4o-mini",
-            messages
+            messages,
+            temperature=0.2,
+            max_tokens=1500,
+            timeout=20
         };
 
         string requestBodyJson = JsonSerializer.Serialize(requestBody, _jsonSerializerOptions);
